@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         fontSize: size.font16,
         fontFamily: type.regular,
         padding: 10,
+        color: colors.black
     },
     icon: {
         height: 20,

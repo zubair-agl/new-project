@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: 1,
         alignItems: 'center',
-        //paddingHorizontal: 20,
-        //backgroundColor: 'gray',
         marginRight: 20,
         padding: 10
     },
@@ -73,7 +71,8 @@ const styles = StyleSheet.create({
         fontFamily: type.regular,
         fontSize: size.font18,
         lineHeight: 21.78,
-        fontWeight: weight.mid
+        fontWeight: weight.mid,
+        color: 'rgba(0, 0, 0, 0.55)'
     },
     categoryCount: {
         borderRadius: 30,
