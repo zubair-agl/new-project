@@ -10,14 +10,14 @@ import {
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
-class ScanScreen extends Component {
-  onSuccess = e => {
+function ScanQRScreen(props) {
+  const onSuccess = e => {
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err)
     );
   };
 
-  render() {
+  
     return (
       <QRCodeScanner
         onRead={this.onSuccess}
@@ -30,13 +30,13 @@ class ScanScreen extends Component {
           </Text>
         }
         bottomContent={
-          <TouchableOpacity style={styles.buttonTouchable} onPress={()=> {this.props.navigation.goBack()}}>
+          <TouchableOpacity style={styles.buttonTouchable} onPress={()=> {props.navigation.goBack()}}>
             <Text style={styles.buttonText}>OK. Got it!</Text>
           </TouchableOpacity>
         }
       />
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScanScreen
+export default ScanQRScreen

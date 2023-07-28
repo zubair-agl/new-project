@@ -1,8 +1,9 @@
 import React from "react";
-import { View, TextInput, StyleSheet, Image } from "react-native";
+import { View, TextInput, StyleSheet, Pressable } from "react-native";
 import { metrics } from "../theme/metrics";
 import { size, type } from "../theme/fonts";
 import { colors } from "../theme/colors";
+import Eye from '../../assets/images/eye.svg'
 
 
 const LoginInput = (props) => {
@@ -19,10 +20,21 @@ const LoginInput = (props) => {
                 keyboardType={props.keyboardType}
             />
             {
-                props.password ?
-                    <Image source={require('../../assets/images/eyeIcon.png')} style={styles.icon} />
-                    :
-                    <></>
+                props.password && props.secureTextEntry ?
+                    <Pressable
+                        onPress={props.onPress}
+                    >
+                        <Eye style={styles.icon} />
+                    </Pressable>
+
+                    : props.password && !props.secureTextEntry ?
+                        <Pressable
+                            onPress={props.onPress}
+                        >
+                            <Eye style={styles.icon} />
+                        </Pressable>
+                        :
+                        <></>
             }
 
         </View>

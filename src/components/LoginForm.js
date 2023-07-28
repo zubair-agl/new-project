@@ -1,17 +1,20 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
 import LoginInput from './LoginInput'
-import { Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet, View } from 'react-native'
 import ThemeButton from './ThemeButton'
 import { size, type, weight } from '../theme/fonts'
 import { colors } from '../theme/colors'
-import { metrics } from '../theme/metrics'
 import { loginValidationSchema } from '../util/validations'
 import { useNavigation } from '@react-navigation/native';
+import CheckBox from '@react-native-community/checkbox';
 
 const LoginForm = (props) => {
 
     const navigation = useNavigation();
+
+    const [secureTextEntry, setSecureTextEntry] = useState(true);
+    const [toggleCheckBox, setToggleCheckBox] = useState(false) // checkbox state
 
     return (
         <Formik
@@ -47,12 +50,22 @@ const LoginForm = (props) => {
                         onChangeText={handleChange('password')}
                         onBlur={handleBlur('password')}
                         value={values.password}
+                        secureTextEntry={secureTextEntry}
+                        onPress={() => setSecureTextEntry(!secureTextEntry)}
 
                     />
                     {(errors.password && touched.password) &&
                         <Text style={{ fontSize: 10, color: 'red' }}>{errors.password}</Text>
                     }
-                    <Text style={styles.checkBoxText}> Remember me</Text>
+                    <View style={styles.checkBox}>
+                        <CheckBox
+                            disabled={false}
+                            value={toggleCheckBox}
+                            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                        />
+                        <Text style={styles.checkBoxText}> Remember me</Text>
+                    </View>
+
                     <ThemeButton
                         title={'Login'}
                         onPress={() => {
@@ -80,10 +93,14 @@ const styles = StyleSheet.create({
     checkBoxText: {
         fontWeight: weight.semi,
         fontSize: size.font15,
-        color: 'rgba(0, 12, 20, 1)',
-        marginTop: 20,
-        marginBottom: metrics.screenHeight * 0.1
+        color: 'rgba(0, 12, 20, 1)'
     },
+    checkBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: '5%',
+        marginBottom: '20%'
+    }
 })
 
 export default LoginForm

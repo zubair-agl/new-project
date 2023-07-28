@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity, Platform } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { colors } from '../theme/colors'
 import { metrics } from '../theme/metrics'
 import Bar from '../../assets/images/bar.svg'
@@ -20,8 +20,10 @@ const NotifStausBar = () => {
           }}
         >
         <View style={styles.conatiner}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image source={require('../../assets/images/bar.png')} style={{ height: 30, width: 30 , marginLeft: 20}} />
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+                {/* <Image source={require('../../assets/images/bar.png')} style={{ height: 30, width: 30 , marginLeft: 20}} /> */}
+                <Bar style={{ position: 'absolute'}}/>
+                
                 <Text style={styles.heading}>Notifications</Text>
             </View>
 
@@ -64,10 +66,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         alignItems: 'center',
         marginRight: 20,
-        padding: 10
+        //padding: 10
     },
     categoryText: {
-        paddingVertical: 10,
+        padding: 10,
         fontFamily: type.regular,
         fontSize: size.font18,
         lineHeight: 21.78,
@@ -83,14 +85,13 @@ const styles = StyleSheet.create({
         color: 'rgba(0, 0, 0, 1)'
     },
     heading: {
-        alignSelf: 'center',
         fontWeight: weight.mid,
         fontSize: size.font20,
         lineHeight: 24.2,
         fontFamily: type.regular,
         color: colors.black,
         padding: 20,
-
-
+        width: '100%',
+        textAlign: 'center'
     }
 })
