@@ -9,8 +9,6 @@ import Modal from "react-native-modal";
 import Close from '../../assets/images/close.svg'
 
 const ScanDialogue = (props) => {
-
-
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -21,7 +19,10 @@ const ScanDialogue = (props) => {
                 <View
                     style={styles.modalView}
                 >
-                    <TouchableOpacity onPress={props.onDismiss} style={styles.dismiss}>
+                    <TouchableOpacity
+                        onPress={props.onDismiss} // function to close pop-up
+                        style={styles.dismiss}
+                    >
                         <Close />
                     </TouchableOpacity>
                     <Text style={styles.heading}>Scan QR Code</Text>
@@ -31,7 +32,7 @@ const ScanDialogue = (props) => {
                     <QR style={styles.qr} />
                     <ThemeButton
                         title={'Place Camera Code'}
-                        onPress={props.onPress}
+                        onPress={props.onPress} // function to call on button press
                     />
                 </View>
             </Modal>

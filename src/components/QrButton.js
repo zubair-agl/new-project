@@ -6,18 +6,18 @@ import { size, type, weight } from "../theme/fonts";
 import QR from '../../assets/images/qr.svg';
 import DropShadow from "react-native-drop-shadow";
 
-const QrButton = (props) => {
+const QrButton = (props) => { //button component use in scanning qr codes
     return (
         <DropShadow
-        style={{
-            shadowColor: "rgba(0, 0, 0, 0.12)",
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.3,
-            shadowRadius: 48,
-          }}
+            style={{
+                shadowColor: "rgba(0, 0, 0, 0.12)",
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: 0.3,
+                shadowRadius: 48,
+            }}
         >
             <TouchableOpacity
                 style={styles.button}

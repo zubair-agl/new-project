@@ -11,9 +11,9 @@ import CheckBox from '@react-native-community/checkbox';
 
 const LoginForm = (props) => {
 
-    const navigation = useNavigation();
+    const navigation = useNavigation(); // hook to use navigation
 
-    const [secureTextEntry, setSecureTextEntry] = useState(true);
+    const [secureTextEntry, setSecureTextEntry] = useState(true); // password visibility state
     const [toggleCheckBox, setToggleCheckBox] = useState(false) // checkbox state
 
     return (
@@ -51,7 +51,9 @@ const LoginForm = (props) => {
                         onBlur={handleBlur('password')}
                         value={values.password}
                         secureTextEntry={secureTextEntry}
-                        onPress={() => setSecureTextEntry(!secureTextEntry)}
+                        onPress={() => {
+                            setSecureTextEntry(!secureTextEntry)
+                        }}
 
                     />
                     {(errors.password && touched.password) &&
@@ -59,6 +61,7 @@ const LoginForm = (props) => {
                     }
                     <View style={styles.checkBox}>
                         <CheckBox
+                            tintColors={colors.black}
                             disabled={false}
                             value={toggleCheckBox}
                             onValueChange={(newValue) => setToggleCheckBox(newValue)}

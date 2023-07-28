@@ -3,7 +3,7 @@ import { colors } from "../../theme/colors";
 import { size, type, weight } from "../../theme/fonts";
 import { metrics } from "../../theme/metrics";
 
-const styles= StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.primary
@@ -27,11 +27,11 @@ const styles= StyleSheet.create({
         color: colors.secondary,
     },
     headingLayout: {
-        marginTop: metrics.screenHeight*0.05,
+        marginTop: metrics.screenHeight * 0.05,
         marginLeft: 20
     },
     formLayout: {
-        width: metrics.screenWidth*0.8
+        width: metrics.screenWidth * 0.8
     },
     emoticon: {
         fontSize: size.font24,

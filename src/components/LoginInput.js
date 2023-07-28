@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, StyleSheet, Pressable } from "react-native";
+import { View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { metrics } from "../theme/metrics";
 import { size, type } from "../theme/fonts";
 import { colors } from "../theme/colors";
@@ -21,18 +21,18 @@ const LoginInput = (props) => {
             />
             {
                 props.password && props.secureTextEntry ?
-                    <Pressable
-                        onPress={props.onPress}
+                    <TouchableOpacity
+                        onPress={props.onPress} // function to reveal password
                     >
                         <Eye style={styles.icon} />
-                    </Pressable>
+                    </TouchableOpacity>
 
                     : props.password && !props.secureTextEntry ?
-                        <Pressable
-                            onPress={props.onPress}
+                        <TouchableOpacity
+                            onPress={props.onPress} // function to hide password
                         >
                             <Eye style={styles.icon} />
-                        </Pressable>
+                        </TouchableOpacity>
                         :
                         <></>
             }

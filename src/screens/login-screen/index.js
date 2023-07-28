@@ -5,9 +5,6 @@ import { colors } from "../../theme/colors";
 import LoginForm from "../../components/LoginForm";
 
 function LoginScreen(props) {
-
-
-
     return (
         <>
             <StatusBar

@@ -10,7 +10,7 @@ import ScanDialogue from '../../components/ScanDialogue'
 
 
 function NotificationListScreen(props) {
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false); // pop-up state
 
     return (
         <SafeAreaView style={styles.container}>
@@ -23,13 +23,12 @@ function NotificationListScreen(props) {
             </>
             <NotifStausBar />
             <NotificationsList />
-
             <View style={{ height: metrics.screenHeight * 0.15 }}>
                 <QrButton
                     onPress={() => {
-                        setModalVisible(!modalVisible)}}
+                        setModalVisible(!modalVisible)
+                    }}
                 />
-
             </View>
             <ScanDialogue
                 visible={modalVisible}

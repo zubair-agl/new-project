@@ -9,7 +9,7 @@ const NotificationsList = (props) => {
     return (
         <View style={styles.conatiner}>
             {/* <FlatList /> */}
-            <TouchableOpacity style={[styles.cardContainer, {backgroundColor: colors.primary_light}]}>
+            <TouchableOpacity style={[styles.cardContainer, { backgroundColor: colors.primary_light }]}>
                 <Icon />
                 <View style={[styles.cardContent]}>
                     <Text style={styles.title}>Lorem Ipsum</Text>
