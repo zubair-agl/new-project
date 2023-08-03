@@ -1,22 +1,26 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { colors } from '../theme/colors'
-import { metrics } from '../theme/metrics'
-import Bar from '../../assets/images/bar.svg'
-import { size, type, weight } from '../theme/fonts'
+import { colors } from '../../theme/colors'
+import { metrics } from '../../theme/metrics'
+import Bar from '../../../assets/images/bar.svg'
+import { size, type, weight } from '../../theme/fonts'
 import DropShadow from "react-native-drop-shadow";
+import { useNavigation } from '@react-navigation/native'
 
-const NotifStausBar = () => {
+const NotifStausBar = (props) => {
+
+    const [starred, setStarred] = useState(false)
+
     return (
         <DropShadow
             style={{
                 shadowColor: "rgba(0, 0, 0, 0.18)",
                 shadowOffset: {
                     width: 0,
-                    height: 1,
+                    height: 0.5,
                 },
-                shadowOpacity: 1,
-                shadowRadius: 6,
+                shadowOpacity: 0.25,
+                shadowRadius: 3,
             }}
         >
             <View style={styles.conatiner}>
@@ -25,12 +29,22 @@ const NotifStausBar = () => {
                     <Text style={styles.heading}>Notifications</Text>
                 </View>
                 <View style={styles.category}>
-                    <TouchableOpacity style={styles.categoryLabel}>
-                        <Text style={styles.categoryText}>All</Text>
+                    <TouchableOpacity style={[styles.categoryLabel, { borderBottomWidth: starred ? 0 : 2 }]}
+                        onPress={() => {
+                            setStarred(false)
+                            props.onAllNotif()
+                        }}
+                    >
+                        <Text style={[styles.categoryText, {color : starred ? 'rgba(0, 0, 0, 0.55)': colors.primary}]}>All</Text>
                         <Text style={styles.categoryCount}>2</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.categoryLabel, { borderBottomWidth: 0 }]}>
-                        <Text style={styles.categoryText}>Starred</Text>
+                    <TouchableOpacity style={[styles.categoryLabel, { borderBottomWidth: starred ? 2 : 0 }]}
+                        onPress={() => {
+                            setStarred(true)
+                            props.onStarredNotif()
+                        }}
+                    >
+                        <Text style={[styles.categoryText, {color : !starred ? 'rgba(0, 0, 0, 0.55)': colors.primary}]}>Starred</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -55,10 +69,10 @@ const styles = StyleSheet.create({
     },
     categoryLabel: {
         flexDirection: 'row',
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         alignItems: 'center',
         marginRight: 20,
-        //padding: 10
+        borderColor: colors.primary
     },
     categoryText: {
         padding: 10,

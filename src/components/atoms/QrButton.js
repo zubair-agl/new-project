@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
-import { metrics } from "../theme/metrics";
-import { colors } from "../theme/colors";
-import { size, type, weight } from "../theme/fonts";
-import QR from '../../assets/images/qr.svg';
+import { colors } from "../../theme/colors";
+import { size, type, weight } from "../../theme/fonts";
+import QR from '../../../assets/images/qr.svg';
 import DropShadow from "react-native-drop-shadow";
 
 const QrButton = (props) => { //button component use in scanning qr codes

@@ -1,9 +1,9 @@
 import React from "react";
-import { View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
-import { metrics } from "../theme/metrics";
-import { size, type } from "../theme/fonts";
-import { colors } from "../theme/colors";
-import Eye from '../../assets/images/eye.svg'
+import { View, TextInput, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { metrics } from "../../theme/metrics";
+import { size, type } from "../../theme/fonts";
+import { colors } from "../../theme/colors";
+import Eye from '../../../assets/images/eye.svg'
 
 
 const LoginInput = (props) => {
@@ -31,7 +31,7 @@ const LoginInput = (props) => {
                         <TouchableOpacity
                             onPress={props.onPress} // function to hide password
                         >
-                            <Eye style={styles.icon} />
+                            <Image source= {require('../../../assets/images/hide.png')} style= {styles.icon}/>
                         </TouchableOpacity>
                         :
                         <></>

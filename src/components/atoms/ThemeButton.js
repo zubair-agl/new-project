@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
-import { metrics } from "../theme/metrics";
-import { colors } from "../theme/colors";
-import { size, type } from "../theme/fonts";
+import { metrics } from "../../theme/metrics";
+import { colors } from "../../theme/colors";
+import { size, type } from "../../theme/fonts";
 
 const ThemeButton = (props) => {
     return (

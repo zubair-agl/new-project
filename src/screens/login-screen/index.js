@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { View, Text, SafeAreaView, StatusBar, KeyboardAvoidingView, Platform } from "react-native"
 import styles from "./styles";
 import { colors } from "../../theme/colors";
-import LoginForm from "../../components/LoginForm";
+import LoginForm from "../../components/organisms/LoginForm";
 
 function LoginScreen(props) {
     return (

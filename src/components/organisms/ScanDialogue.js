@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, Pressable, View, TouchableOpacity } from 'react-native';
-import { colors } from '../theme/colors';
-import QR from '../../assets/images/qrScan.svg'
-import { size, type, weight } from '../theme/fonts';
-import { metrics } from '../theme/metrics';
-import ThemeButton from './ThemeButton';
+import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native';
+import { colors } from '../../theme/colors';
+import QR from '../../../assets/images/qrScan.svg'
+import { size, type, weight } from '../../theme/fonts';
+import { metrics } from '../../theme/metrics';
+import ThemeButton from '../atoms/ThemeButton';
 import Modal from "react-native-modal";
-import Close from '../../assets/images/close.svg'
+import Close from '../../../assets/images/close.svg'
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
 const ScanDialogue = (props) => {
+
+    const onSuccess = e => {
+        Linking.openURL(e.data).catch(err =>
+            console.error('An error occured', err)
+        );
+    };
+
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -25,14 +33,27 @@ const ScanDialogue = (props) => {
                     >
                         <Close />
                     </TouchableOpacity>
-                    <Text style={styles.heading}>Scan QR Code</Text>
-                    <Text style={styles.content}>Place qr code inside the frame to scan please
-                        avoid shake to get results quickly</Text>
-
-                    <QR style={styles.qr} />
-                    <ThemeButton
-                        title={'Place Camera Code'}
-                        onPress={props.onPress} // function to call on button press
+                    <QRCodeScanner
+                        onRead={onSuccess}
+                        //flashMode={RNCamera.Constants.FlashMode.torch}
+                        topContent={
+                            <>
+                                <Text style={styles.heading}>Scan QR Code</Text>
+                                <Text style={styles.content}>Place qr code inside the frame to scan please
+                                    avoid shake to get results quickly</Text>
+                            </>
+                        }
+                        showMarker
+                        customMarker={
+                            <QR style={styles.qr} />
+                        }
+                        cameraStyle={{ position: 'absolute', height: 200, width: 200, alignSelf: 'center' }}
+                        bottomContent={
+                            <ThemeButton
+                                title={'Place Camera Code'}
+                                onPress={props.onPress} // function to call on button press
+                            />
+                        }
                     />
                 </View>
             </Modal>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
-import LoginInput from './LoginInput'
+import LoginInput from '../atoms/LoginInput'
 import { Text, StyleSheet, View } from 'react-native'
-import ThemeButton from './ThemeButton'
-import { size, type, weight } from '../theme/fonts'
-import { colors } from '../theme/colors'
-import { loginValidationSchema } from '../util/validations'
+import ThemeButton from '../atoms/ThemeButton'
+import { size, type, weight } from '../../theme/fonts'
+import { colors } from '../../theme/colors'
+import { loginValidationSchema } from '../../util/validations'
 import { useNavigation } from '@react-navigation/native';
 import CheckBox from '@react-native-community/checkbox';
 
