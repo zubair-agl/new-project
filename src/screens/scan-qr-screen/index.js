@@ -3,10 +3,16 @@ import {
     Text,
     TouchableOpacity,
     Linking,
+    SafeAreaView, Dimensions, View
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import styles from './styles';
+import Close from '../../../assets/images/closeQR.svg'
+import { metrics } from '../../theme/metrics';
+import Scan from '../../../assets/images/scan.svg'
+import More from '../../../assets/images/more-vertical.svg'
+import ZapOff from '../../../assets/images/zap-off.svg'
 
 
 function ScanQRScreen(props) {
@@ -17,22 +23,44 @@ function ScanQRScreen(props) {
     };
 
     return (
-        <QRCodeScanner
-            onRead={onSuccess}
-            flashMode={RNCamera.Constants.FlashMode.torch}
-            topContent={
-                <Text style={styles.centerText}>
-                    Go to{' '}
-                    <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-                    your computer and scan the QR code.
-                </Text>
-            }
-            bottomContent={
-                <TouchableOpacity style={styles.buttonTouchable} onPress={() => { props.navigation.goBack() }}>
-                    <Text style={styles.buttonText}>OK. Got it!</Text>
-                </TouchableOpacity>
-            }
-        />
+        <SafeAreaView style={styles.container}>
+            <QRCodeScanner
+                showMarker
+                onRead={onSuccess}
+                flashMode={RNCamera.Constants.FlashMode.auto}
+                cameraStyle={{
+                    height: metrics.screenHeight
+                }}
+                bottomViewStyle={styles.bottomViewStyle}
+                topViewStyle={styles.topViewStyle}
+
+                customMarker={
+                    <Scan />
+                }
+            />
+            <TouchableOpacity
+                style={styles.moreVerContainer}
+            >
+                <More />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.flashContainer}
+            >
+                <ZapOff />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.closeIconContainer}
+                onPress={() => props.navigation.goBack()}
+            >
+                <Close />
+            </TouchableOpacity>
+
+        </SafeAreaView>
+
+
+
     );
 
 }

@@ -44,7 +44,7 @@ function NotificationListScreen(props) {
             <View style={{ height: metrics.screenHeight * 0.15 }}>
                 <QrButton
                     onPress={() => {
-                        setModalVisible(!modalVisible)
+                        props.navigation.navigate('ScanQRScreen')
                     }}
                 />
             </View>

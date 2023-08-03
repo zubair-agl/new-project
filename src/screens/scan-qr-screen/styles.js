@@ -1,24 +1,35 @@
 import { StyleSheet } from 'react-native'
+import { metrics } from '../../theme/metrics';
 
 const styles = StyleSheet.create({
-    centerText: {
+    container: {
         flex: 1,
-        fontSize: 18,
-        padding: 32,
-        color: '#777'
     },
-    textBold: {
-        fontWeight: '500',
-        color: '#000'
+    bottomViewStyle: {
+        height: 0,
+        flex: 0
     },
-    buttonText: {
-        fontSize: 21,
-        color: 'rgb(0,122,255)'
+    topViewStyle: {
+        height: 0,
+        flex: 0
     },
-    buttonTouchable: {
-        padding: 16,
-        backgroundColor: 'transparent'
+    flashContainer: {
+        position: 'absolute',
+        alignSelf: 'flex-start',
+        left: metrics.screenWidth * 0.05,
+        top: metrics.screenHeight * 0.05
     },
+    moreVerContainer: {
+        position: 'absolute',
+        alignSelf: 'flex-end',
+        right: metrics.screenWidth * 0.05,
+        top: metrics.screenHeight * 0.05
+    },
+    closeIconContainer: {
+        position: 'absolute',
+        alignSelf: 'center',
+        bottom: metrics.screenHeight * 0.05
+    }
 });
 
 export default styles
