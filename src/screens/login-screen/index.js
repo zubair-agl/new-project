@@ -3,8 +3,15 @@ import { View, Text, SafeAreaView, StatusBar, KeyboardAvoidingView, Platform } f
 import styles from "./styles";
 import { colors } from "../../theme/colors";
 import LoginForm from "../../components/organisms/LoginForm";
+import { userLogin } from "../../redux/actions";
+import { useDispatch, useSelector } from 'react-redux';
 
 function LoginScreen(props) {
+
+    const dispatch = useDispatch() // dispatching login action through this hook
+    const val= useSelector((state)=> state.loginReducer)
+    console.log(val)
+    
     return (
         <>
             <StatusBar
@@ -23,7 +30,7 @@ function LoginScreen(props) {
                 <View style={styles.formContainer} enabled={false}>
                     <View style={styles.formLayout}>
                         <LoginForm
-
+                            onSubmit= {(values)=> dispatch(userLogin(values))}
                         />
                     </View>
                 </View>

@@ -1,0 +1,1 @@
+export const LOGIN_URL = 'http://13.234.176.50:5000/api/auth/login'

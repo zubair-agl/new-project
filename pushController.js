@@ -1,59 +1,53 @@
 import React, {Component} from "react";
 import PushNotification from "react-native-push-notification";
-import PushNotificationIOS from "@react-native-community/push-notification-ios";
 // var PushNotification = require("react-native-push-notification");
-export default class PushController extends Component{
-componentDidMount(){
-    // Must be outside of any component LifeCycle (such as `componentDidMount`).
-    PushNotification.configure({
-      // (optional) Called when Token is generated (iOS and Android)
-      onRegister: function (token) {
-        console.log("TOKEN:", token);
-      },
-    
-      // (required) Called when a remote is received or opened, or local notification is opened
-      onNotification: function (notification) {
-        console.log("NOTIFICATION:", notification);
-        // (required) Called when a remote is received or opened, or local notification is opened
-        notification.finish(PushNotificationIOS.FetchResult.NoData);
-      },
-    
-      // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
-      onAction: function (notification) {
-        console.log("ACTION:", notification.action);
-        console.log("NOTIFICATION:", notification);
-    
-        // process the action
-      },
-    
-      // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
-      onRegistrationError: function(err) {
-        console.error(err.message, err);
-      },
-    
-      // IOS ONLY (optional): default: all - Permissions to register.
-      permissions: {
-        alert: true,
-        badge: true,
-        sound: true,
-      },
-    
-      // Should the initial notification be popped automatically
-      // default: true
-      popInitialNotification: true,
-    
-      /**
-       * (optional) default: true
-       * - Specified if permissions (ios) and token (android and ios) will requested or not,
-       * - if not, you must call PushNotificationsHandler.requestPermissions() later
-       * - if you are not using remote notification or do not have Firebase installed, use this:
-       *     requestPermissions: Platform.OS === 'ios'
-       */
-      requestPermissions: true,
-    });
 
-}
-render(){
-return null;
-}
+export default class PushController extends Component{
+    componentDidMount(){
+      PushNotification.createChannel(
+        {
+          channelId: "fcm_fallback_notification_channel", // (required)
+          channelName: "Special messasge", // (required)
+          channelDescription: "Notification for special message", // (optional) default: undefined.
+          importance: 4, // (optional) default: 4. Int value of the Android notification importance
+          vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+        },
+        (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
+      );
+      PushNotification.localNotification({
+        channelId:'fcm_fallback_notification_channel', //his must be same with channelid in createchannel
+        title:'hello',
+        message:'test message'
+      })
+        PushNotification.configure({
+            // (optional) Called when Token is generated (iOS and Android)
+            onRegister: function(token) {
+              console.log("TOKEN:", token);
+            },
+          
+            // (required) Called when a remote or local notification is opened or received
+            onNotification: function(notification) {
+              console.log("NOTIFICATION:", notification);
+          
+              // process the notification here
+          
+              // required on iOS only 
+              //notification.finish(PushNotificationIOS.FetchResult.NoData);
+            },
+            // Android only
+            senderID: "1028018228642",
+            // iOS only
+            permissions: {
+              alert: true,
+              badge: true,
+              sound: true
+            },
+            popInitialNotification: true,
+            requestPermissions: true
+          });
+    }
+
+    render(){
+        return null;
+    }
 }

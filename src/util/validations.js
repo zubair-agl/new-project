@@ -12,10 +12,10 @@ export const loginValidationSchema = yup.object().shape({
     .required('Email Address is Required'),
   password: yup
     .string()
-    .min(8, ({ min }) => `Password must be at least ${min} characters`)
-    .matches(/[0-9]/, getCharacterValidationError("digit"))
-    .matches(/[a-z]/, getCharacterValidationError("lowercase"))
-    .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
-    .matches(/[-’/`~!#*$@_%+=.,^&(){}[\]|;:”<>?\\]/g, getCharacterValidationError("special character"))
+    // .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    // .matches(/[0-9]/, getCharacterValidationError("digit"))
+    // .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+    // .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
+    // .matches(/[-’/`~!#*$@_%+=.,^&(){}[\]|;:”<>?\\]/g, getCharacterValidationError("special character"))
     .required('Password is required'),
 })

@@ -8,6 +8,7 @@ import { colors } from '../../theme/colors'
 import { loginValidationSchema } from '../../util/validations'
 import { useNavigation } from '@react-navigation/native';
 import CheckBox from '@react-native-community/checkbox';
+import { useDispatch } from "react-redux";
 
 const LoginForm = (props) => {
 
@@ -16,11 +17,13 @@ const LoginForm = (props) => {
     const [secureTextEntry, setSecureTextEntry] = useState(true); // password visibility state
     const [toggleCheckBox, setToggleCheckBox] = useState(false) // checkbox state
 
+    
+
     return (
         <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ email: '', password: '' }}
-            onSubmit={values => console.log(values)}
+            onSubmit={values => props.onSubmit(values)}
         >
             {({
                 handleChange,
