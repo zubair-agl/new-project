@@ -1,11 +1,15 @@
 import React from "react";
 import RootNav from "./src/navigation/root";
+import PushController from "./pushController";
 
 function App() {
 
-    return(
-        <RootNav />
-        
+    return (
+        <>
+            <RootNav />
+            <PushController />
+        </>
+
     )
 }
 

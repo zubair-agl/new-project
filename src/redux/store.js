@@ -1,10 +1,10 @@
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { loginReducer } from './reducer';
+import { authReducer } from './reducer';
 import { createStore, combineReducers } from 'redux';
 
 const rootReducer = combineReducers(
-{ loginReducer: loginReducer }
+{ authReducer: authReducer }
 );
 const configureStore = () => {
 return createStore(rootReducer, applyMiddleware(thunk));

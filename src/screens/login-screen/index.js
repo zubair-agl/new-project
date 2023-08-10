@@ -1,17 +1,61 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { View, Text, SafeAreaView, StatusBar, KeyboardAvoidingView, Platform } from "react-native"
 import styles from "./styles";
 import { colors } from "../../theme/colors";
 import LoginForm from "../../components/organisms/LoginForm";
 import { userLogin } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
+import Geolocation from '@react-native-community/geolocation';
+import publicIP from 'react-native-public-ip';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 function LoginScreen(props) {
 
     const dispatch = useDispatch() // dispatching login action through this hook
-    const val= useSelector((state)=> state.loginReducer)
-    console.log(val)
-    
+    const val = useSelector((state) => state.authReducer)
+    console.log('redux state', val)
+    const [deviceInfo, setDeviceInfo] = useState({
+        device_token: "",
+        device_os: Platform.OS,
+        device_os_version: Platform.Version,
+        device_ip: "",
+        location: ""
+    })
+
+    useEffect(() => {
+        async function fetchFcmToken() {
+            let fcmToken = JSON.parse(await AsyncStorage.getItem("fcmToken"))
+            console.log('fcm', fcmToken)
+            setDeviceInfo({
+                ...deviceInfo,
+                device_token: fcmToken
+            })
+        }
+        Geolocation.getCurrentPosition(info => {
+            console.log(info.coords)
+            setDeviceInfo({
+                ...deviceInfo,
+                location: info.coords
+            })
+        });
+        console.log(Platform.OS, Platform.Version)
+        publicIP()
+            .then(ip => {
+                console.log('ip', ip);
+                setDeviceInfo({
+                    ...deviceInfo,
+                    device_ip: ip
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        fetchFcmToken()
+    }, [])
+
+
+
     return (
         <>
             <StatusBar
@@ -30,7 +74,7 @@ function LoginScreen(props) {
                 <View style={styles.formContainer} enabled={false}>
                     <View style={styles.formLayout}>
                         <LoginForm
-                            onSubmit= {(values)=> dispatch(userLogin(values))}
+                            onSubmit={(values) => dispatch(userLogin(values, deviceInfo))}
                         />
                     </View>
                 </View>
