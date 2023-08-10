@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { View, Text, SafeAreaView, StatusBar, KeyboardAvoidingView, Platform } from "react-native"
+import { View, Text, StatusBar, KeyboardAvoidingView, Platform } from "react-native"
 import styles from "./styles";
 import { colors } from "../../theme/colors";
 import LoginForm from "../../components/organisms/LoginForm";
@@ -15,6 +15,8 @@ function LoginScreen(props) {
     const dispatch = useDispatch() // dispatching login action through this hook
     const val = useSelector((state) => state.authReducer)
     console.log('redux state', val)
+ 
+    // state object for device details
     const [deviceInfo, setDeviceInfo] = useState({
         device_token: "",
         device_os: Platform.OS,
@@ -24,6 +26,7 @@ function LoginScreen(props) {
     })
 
     useEffect(() => {
+        // fetching saved fcm token from local strorage
         async function fetchFcmToken() {
             let fcmToken = JSON.parse(await AsyncStorage.getItem("fcmToken"))
             console.log('fcm', fcmToken)
@@ -32,6 +35,7 @@ function LoginScreen(props) {
                 device_token: fcmToken
             })
         }
+        // getting current location
         Geolocation.getCurrentPosition(info => {
             console.log(info.coords)
             setDeviceInfo({
@@ -40,6 +44,7 @@ function LoginScreen(props) {
             })
         });
         console.log(Platform.OS, Platform.Version)
+        // getting ip address
         publicIP()
             .then(ip => {
                 console.log('ip', ip);

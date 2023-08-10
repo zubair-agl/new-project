@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export async function sendDeviceInfo(deviceInfo) {
 
-  const val = useSelector((state) => state.authReducer) // accessing redux state for accessing user token
+  const val = useSelector((state) => state.authReducer) // redux state for accessing user token
   const headers= {'Authorization': val.token} // headers for post request
 
   try{

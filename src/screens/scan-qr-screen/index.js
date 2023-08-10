@@ -3,7 +3,7 @@ import {
     Text,
     TouchableOpacity,
     Linking,
-    SafeAreaView, Dimensions, View
+    SafeAreaView
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';

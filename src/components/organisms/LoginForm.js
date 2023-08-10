@@ -8,7 +8,6 @@ import { colors } from '../../theme/colors'
 import { loginValidationSchema } from '../../util/validations'
 import { useNavigation } from '@react-navigation/native';
 import CheckBox from '@react-native-community/checkbox';
-import { useDispatch } from "react-redux";
 
 const LoginForm = (props) => {
 
@@ -76,7 +75,6 @@ const LoginForm = (props) => {
                         title={'Login'}
                         onPress={() => {
                             handleSubmit()
-                            navigation.navigate('NotifScreen')
                         }}
                     />
                 </>

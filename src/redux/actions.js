@@ -38,9 +38,9 @@ export const userLogin = (input, deviceInfo) => {
       const response = await login(input)
       console.log('response in actions', response.data.data)
       if (response.status.message === 'Login success') {
+        dispatch(setLoginState({ ...response, userId: response.data.userName }))
         await sendDeviceInfo(deviceInfo) // hitting post request to send device details to server
         setLoginLocal(response.data.data) // calling function to save user token locally
-        dispatch(setLoginState({ ...response, userId: response.data.userName }))
       }
       else {
         Alert.alert('Login Failed', 'Username or Password is incorrect');
