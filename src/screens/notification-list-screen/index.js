@@ -8,6 +8,7 @@ import { colors } from '../../theme/colors'
 import { metrics } from '../../theme/metrics'
 import ScanDialogue from '../../components/organisms/ScanDialogue'
 import StarredList from '../../components/organisms/StarredList'
+import ThemeButton from '../../components/atoms/ThemeButton'
 
 
 

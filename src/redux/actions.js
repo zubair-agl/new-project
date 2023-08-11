@@ -3,6 +3,8 @@ import { Alert } from 'react-native'; // to show alerts in app
 import { login } from '../api/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendDeviceInfo } from '../api/nativeServices';
+import { DEVICE_DETAIL_URL } from '../api/constants';
+import axios from "axios";
 
 
 // dispatches the "payload" to reducer
@@ -32,15 +34,16 @@ const setLoginLocal = async (loginToken) => {
 
 
 export const userLogin = (input, deviceInfo) => {
-  console.log(deviceInfo)
+  console.log('device info in req',deviceInfo, input)
   return async (dispatch) => {
     try {
       const response = await login(input)
       console.log('response in actions', response.data.data)
       if (response.status.message === 'Login success') {
         dispatch(setLoginState({ ...response, userId: response.data.userName }))
-        await sendDeviceInfo(deviceInfo) // hitting post request to send device details to server
         setLoginLocal(response.data.data) // calling function to save user token locally
+        const headers= {'Authorization': response.data.data}
+        await sendDeviceInfo(deviceInfo, headers)
       }
       else {
         Alert.alert('Login Failed', 'Username or Password is incorrect');
@@ -53,7 +56,7 @@ export const userLogin = (input, deviceInfo) => {
   };
 };
 
-export const userLogout = (input) => {
+export const userLogout = () => {
   return async (dispatch) => {
     try {
       await AsyncStorage.clear()

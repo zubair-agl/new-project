@@ -19,24 +19,24 @@ const LoginInput = (props) => {
                 secureTextEntry={props.secureTextEntry}
                 keyboardType={props.keyboardType}
             />
-            {
-                props.password && props.secureTextEntry ?
-                    <TouchableOpacity
-                        onPress={props.onPress} // function to reveal password
-                    >
+
+            <TouchableOpacity
+                onPress={props.onPress} // function to reveal password
+                style={{ marginLeft: -metrics.screenWidth * 0.1 }}
+            >
+                {
+                    props.password && props.secureTextEntry ?
                         <Eye style={styles.icon} />
-                    </TouchableOpacity>
+                        : props.password && !props.secureTextEntry ?
+                            <Image source={require('../../../assets/images/hide.png')}
+                                style={styles.icon}
+                            />
+                            :
+                            <></>
 
-                    : props.password && !props.secureTextEntry ?
-                        <TouchableOpacity
-                            onPress={props.onPress} // function to hide password
-                        >
-                            <Image source= {require('../../../assets/images/hide.png')} style= {styles.icon}/>
-                        </TouchableOpacity>
-                        :
-                        <></>
-            }
+                }
 
+            </TouchableOpacity>
         </View>
     )
 }
@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     icon: {
         height: 20,
         width: 20,
-        marginLeft: -metrics.screenWidth * 0.1
     }
 })
 

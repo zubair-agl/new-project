@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Geolocation from '@react-native-community/geolocation';
 import publicIP from 'react-native-public-ip';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushController from "../../../pushController";
 
 
 function LoginScreen(props) {
@@ -22,7 +23,7 @@ function LoginScreen(props) {
         device_os: Platform.OS,
         device_os_version: Platform.Version,
         device_ip: "",
-        location: ""
+        //location: "",
     })
 
     useEffect(() => {
@@ -30,18 +31,16 @@ function LoginScreen(props) {
         async function fetchFcmToken() {
             let fcmToken = JSON.parse(await AsyncStorage.getItem("fcmToken"))
             console.log('fcm', fcmToken)
-            setDeviceInfo({
-                ...deviceInfo,
-                device_token: fcmToken
-            })
+            deviceInfo.device_token= fcmToken
+            // setDeviceInfo({
+            //     ...deviceInfo,
+            //     device_token: fcmToken
+            // })
         }
         // getting current location
         Geolocation.getCurrentPosition(info => {
             console.log(info.coords)
-            setDeviceInfo({
-                ...deviceInfo,
-                location: info.coords
-            })
+           // deviceInfo.location= info.coords
         });
         console.log(Platform.OS, Platform.Version)
         // getting ip address
@@ -57,7 +56,7 @@ function LoginScreen(props) {
                 console.log(error);
             });
         fetchFcmToken()
-    }, [])
+    },[])
 
 
 

@@ -9,7 +9,6 @@ function App() {
             <RootNav />
             <PushController />
         </>
-
     )
 }
 

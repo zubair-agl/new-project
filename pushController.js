@@ -18,11 +18,11 @@ function PushController() {
       },
       (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
     );
-    PushNotification.localNotification({
-      channelId: 'fcm_fallback_notification_channel', //his must be same with channelid in createchannel
-      title: 'hello',
-      message: 'test message'
-    })
+    // PushNotification.localNotification({
+    //   channelId: 'fcm_fallback_notification_channel', //his must be same with channelid in createchannel
+    //   title: 'hello',
+    //   message: 'test message'
+    // })
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: async function (token) {

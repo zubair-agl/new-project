@@ -1,11 +1,8 @@
 import axios from "axios";
 import { DEVICE_DETAIL_URL, LOGIN_URL } from "./constants";
-import { useDispatch, useSelector } from 'react-redux';
+import { Alert } from 'react-native'; 
 
-export async function sendDeviceInfo(deviceInfo) {
-
-  const val = useSelector((state) => state.authReducer) // redux state for accessing user token
-  const headers= {'Authorization': val.token} // headers for post request
+export async function sendDeviceInfo(deviceInfo, headers) {
 
   try{
     // sending device details to server
@@ -14,6 +11,7 @@ export async function sendDeviceInfo(deviceInfo) {
   }
   catch(err) {
     console.log(err)
+    Alert.alert('Error', 'some error occured while sending device info')
   }
 
 }
