@@ -1,22 +1,20 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import LoginInput from '../atoms/LoginInput'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, ActivityIndicator } from 'react-native'
 import ThemeButton from '../atoms/ThemeButton'
 import { size, type, weight } from '../../theme/fonts'
 import { colors } from '../../theme/colors'
 import { loginValidationSchema } from '../../util/validations'
-import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux'
 import CheckBox from '@react-native-community/checkbox';
 
 const LoginForm = (props) => {
 
-    const navigation = useNavigation(); // hook to use navigation
-
     const [secureTextEntry, setSecureTextEntry] = useState(true); // password visibility state
     const [toggleCheckBox, setToggleCheckBox] = useState(false) // checkbox state
+    const val = useSelector((state) => state.authReducer)
 
-    
 
     return (
         <Formik
@@ -71,12 +69,16 @@ const LoginForm = (props) => {
                         <Text style={styles.checkBoxText}> Remember me</Text>
                     </View>
 
-                    <ThemeButton
-                        title={'Login'}
-                        onPress={() => {
-                            handleSubmit()
-                        }}
-                    />
+                    {
+                        val.isLoading ? <ActivityIndicator size={'small'} />
+                            :
+                            <ThemeButton
+                                title={'Login'}
+                                onPress={() => {
+                                    handleSubmit()
+                                }}
+                            />
+                    }
                 </>
             )}
         </Formik>

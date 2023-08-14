@@ -5,4 +5,6 @@ export const initialState = {
     refreshToken: '',
     expiresOn: '',
     data: '',
+    notifList: [],
+    isLoading: false
   };

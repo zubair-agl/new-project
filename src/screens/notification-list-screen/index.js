@@ -9,17 +9,25 @@ import { metrics } from '../../theme/metrics'
 import ScanDialogue from '../../components/organisms/ScanDialogue'
 import StarredList from '../../components/organisms/StarredList'
 import ThemeButton from '../../components/atoms/ThemeButton'
+import { useDispatch, useSelector } from 'react-redux';
+import { getPushNotifList } from '../../redux/actions'
 
 
 
 function NotificationListScreen(props) {
 
-    useEffect(() => {
-        console.log(onShowAll)
-    }, [onShowAll])
-
     const [modalVisible, setModalVisible] = useState(false); // pop-up state
     const [onShowAll, setOnShowAll] = useState(true)
+
+    const dispatch = useDispatch() // dispatching login action through this hook
+    const val = useSelector((state) => state.authReducer)
+    console.log('redux state', val)
+
+    useEffect(()=> {
+        console.log('user token in notif screen',val.token)
+        dispatch(getPushNotifList(val.token))
+        console.log('push data in noti screen', val.notifList)
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>
@@ -36,7 +44,7 @@ function NotificationListScreen(props) {
             />
             {
                 onShowAll ?
-                    <NotificationsList />
+                    <NotificationsList data= {val.notifList} />
                     :
                     <StarredList />
             }

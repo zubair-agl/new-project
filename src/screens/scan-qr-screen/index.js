@@ -13,6 +13,8 @@ import { metrics } from '../../theme/metrics';
 import Scan from '../../../assets/images/scan.svg'
 import More from '../../../assets/images/more-vertical.svg'
 import ZapOff from '../../../assets/images/zap-off.svg'
+import { useDispatch, useSelector } from 'react-redux';
+import { getPushNotifList } from '../../redux/actions'
 
 
 function ScanQRScreen(props) {
@@ -21,6 +23,10 @@ function ScanQRScreen(props) {
             console.error('An error occured', err)
         );
     };
+
+    const dispatch = useDispatch() // dispatching login action through this hook
+    const val = useSelector((state) => state.authReducer)
+    console.log('redux state', val)
 
     return (
         <SafeAreaView style={styles.container}>

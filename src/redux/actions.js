@@ -5,7 +5,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendDeviceInfo } from '../api/nativeServices';
 import { DEVICE_DETAIL_URL } from '../api/constants';
 import axios from "axios";
+import { getPushNotifications } from '../api/pushNotifications';
 
+
+const setLoading = (loading) => {
+  return {
+    type: t.SET_LOADING,
+    payload: loading
+  }
+}
 
 // dispatches the "payload" to reducer
 const setLoginState = (loginData) => {
@@ -19,9 +27,16 @@ const setLoginState = (loginData) => {
 const setLogoutState = () => {
   return {
     type: t.SET_LOGOUT_STATE,
-    payload: loginData,
   };
 };
+
+// dispatches getPushNotif to reducer
+const setPushNotifState = (notifData) => {
+  return {
+    type: t.PUSH_NOTIFICATIONS,
+    payload: notifData
+  }
+}
 
 // function to store token in local storage
 const setLoginLocal = async (loginToken) => {
@@ -34,24 +49,26 @@ const setLoginLocal = async (loginToken) => {
 
 
 export const userLogin = (input, deviceInfo) => {
-  console.log('device info in req',deviceInfo, input)
+  console.log('device info in req', deviceInfo, input)
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true))
       const response = await login(input)
-      console.log('response in actions', response.data.data)
       if (response.status.message === 'Login success') {
         dispatch(setLoginState({ ...response, userId: response.data.userName }))
         setLoginLocal(response.data.data) // calling function to save user token locally
-        const headers= {'Authorization': response.data.data}
+        const headers = { 'Authorization': response.data.data }
         await sendDeviceInfo(deviceInfo, headers)
       }
       else {
         Alert.alert('Login Failed', 'Username or Password is incorrect');
+        dispatch(setLoading(false))
       }
     }
     catch (error) {
       Alert.alert('Login Failed', 'Some error occured, please retry')
       console.log(error)
+      dispatch(setLoading(false))
     }
   };
 };
@@ -68,3 +85,17 @@ export const userLogout = () => {
     }
   };
 };
+
+export const getPushNotifList = (userToken) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setLoading(true))
+      const response = await getPushNotifications(userToken)
+      dispatch(setPushNotifState(response))
+    }
+    catch (error) {
+      Alert.alert('Notifications Error', 'Some error occured, please retry')
+      console.log(error)
+    }
+  }
+}

@@ -7,7 +7,7 @@ export async function sendDeviceInfo(deviceInfo, headers) {
   try{
     // sending device details to server
     const resPush = await axios.post(`${DEVICE_DETAIL_URL}`, deviceInfo, {headers}) 
-    console.log('pushresponse', resPush.data)
+    console.log('devInforesponse', resPush.data)
   }
   catch(err) {
     console.log(err)
