@@ -14,7 +14,7 @@ import Scan from '../../../assets/images/scan.svg'
 import More from '../../../assets/images/more-vertical.svg'
 import ZapOff from '../../../assets/images/zap-off.svg'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPushNotifList } from '../../redux/actions'
+import { getPushNotifList, qrScanLogin } from '../../redux/actions'
 
 
 function ScanQRScreen(props) {
@@ -22,6 +22,7 @@ function ScanQRScreen(props) {
         Linking.openURL(e.data).catch(err =>
             console.error('An error occured', err)
         );
+        dispatch(qrScanLogin(val.token, e.data))
     };
 
     const dispatch = useDispatch() // dispatching login action through this hook

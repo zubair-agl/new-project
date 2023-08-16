@@ -1,6 +1,6 @@
 import * as t from './contants';
 import { Alert } from 'react-native'; // to show alerts in app
-import { login } from '../api/authService';
+import { login, qrLogin } from '../api/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendDeviceInfo } from '../api/nativeServices';
 import { DEVICE_DETAIL_URL } from '../api/constants';
@@ -97,5 +97,12 @@ export const getPushNotifList = (userToken) => {
       Alert.alert('Notifications Error', 'Some error occured, please retry')
       console.log(error)
     }
+  }
+}
+
+export const qrScanLogin = (userToken, body) => {
+  return async (dispatch) => {
+      dispatch(setLoading(true))
+      const response = await qrLogin(userToken, body)
   }
 }

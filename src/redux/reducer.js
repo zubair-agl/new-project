@@ -28,8 +28,13 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         notifList: action.payload.data,
-        isLoading: false
+        isLoading: false 
       }
+      case t.QR_LOGIN:
+        return {
+          ...state,
+          isLoading: false
+        }  
     default:
       return state;
   }
