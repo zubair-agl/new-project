@@ -3,8 +3,6 @@ import { Alert } from 'react-native'; // to show alerts in app
 import { login, qrLogin } from '../api/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendDeviceInfo } from '../api/nativeServices';
-import { DEVICE_DETAIL_URL } from '../api/constants';
-import axios from "axios";
 import { getPushNotifications } from '../api/pushNotifications';
 
 
@@ -49,7 +47,6 @@ const setLoginLocal = async (loginToken) => {
 
 
 export const userLogin = (input, deviceInfo) => {
-  console.log('device info in req', deviceInfo, input)
   return async (dispatch) => {
     try {
       dispatch(setLoading(true))
@@ -103,6 +100,7 @@ export const getPushNotifList = (userToken) => {
 export const qrScanLogin = (userToken, body) => {
   return async (dispatch) => {
       dispatch(setLoading(true))
+      console.log('scan qr payload', userToken, body)
       const response = await qrLogin(userToken, body)
   }
 }

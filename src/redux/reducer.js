@@ -2,7 +2,6 @@ import { initialState } from './initialState';
 import * as t from './contants';
 
 export const authReducer = (state = initialState, action) => {
-  console.log('login payload', action.payload)
   switch (action.type) {
     case t.SET_LOADING:
       return {

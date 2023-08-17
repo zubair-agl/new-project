@@ -19,15 +19,19 @@ import { getPushNotifList, qrScanLogin } from '../../redux/actions'
 
 function ScanQRScreen(props) {
     const onSuccess = e => {
-        Linking.openURL(e.data).catch(err =>
-            console.error('An error occured', err)
-        );
-        dispatch(qrScanLogin(val.token, e.data))
+        // Linking.openURL(e.data).catch(err =>
+        //     console.error('An error occured', err)
+        // );
+        console.log('scan info',e, val.token)
+        const payload = {
+            'screencode' : e.data
+        }
+        dispatch(qrScanLogin(val.token, payload))
     };
 
     const dispatch = useDispatch() // dispatching login action through this hook
     const val = useSelector((state) => state.authReducer)
-    console.log('redux state', val)
+    
 
     return (
         <SafeAreaView style={styles.container}>

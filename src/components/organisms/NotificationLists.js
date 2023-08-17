@@ -13,7 +13,7 @@ const NotificationsList = (props) => {
     const val = useSelector((state) => state.authReducer)
 
     return (
-        <View style={styles.conatiner} >
+        <View>
             {
                 val.isLoading ? <ActivityIndicator />
                 :
@@ -46,12 +46,6 @@ const NotificationsList = (props) => {
 }
 
 const styles = StyleSheet.create({
-    conatiner: {
-        height: metrics.screenHeight * 0.7,
-        width: metrics.width,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     cardContainer: {
         flexDirection: 'row',
         alignItems: 'center',

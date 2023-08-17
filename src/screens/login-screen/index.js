@@ -15,7 +15,6 @@ function LoginScreen(props) {
 
     const dispatch = useDispatch() // dispatching login action through this hook
     const val = useSelector((state) => state.authReducer)
-    console.log('redux state', val)
  
     // state object for device details
     const [deviceInfo, setDeviceInfo] = useState({

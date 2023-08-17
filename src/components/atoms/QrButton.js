@@ -19,7 +19,7 @@ const QrButton = (props) => { //button component use in scanning qr codes
             }}
         >
             <TouchableOpacity
-                style={styles.button}
+                style={[styles.button, props.style]}
                 onPress={props.onPress}
             >
                 <QR />

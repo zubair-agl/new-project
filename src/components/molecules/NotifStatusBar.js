@@ -57,7 +57,7 @@ export default NotifStausBar
 
 const styles = StyleSheet.create({
     conatiner: {
-        height: metrics.screenHeight * 0.14,
+        height: metrics.screenHeight * 0.15,
         width: metrics.screenWidth,
         backgroundColor: colors.secondary,
     },

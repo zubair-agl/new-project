@@ -19,8 +19,8 @@ export async function qrLogin(userToken, body) {
       const headers = {
           'Authorization': userToken
       }
-      const res = await axios.post(`${QR_LOGIN_URL}`, {body}, {headers}) 
-      console.log('pushresponse', res.data)
+      const res = await axios.post(`${QR_LOGIN_URL}`, body, {headers}) 
+      console.log('scan qr data', res.data)
       return res.data
     }
     catch(err) {
