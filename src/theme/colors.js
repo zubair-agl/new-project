@@ -3,5 +3,6 @@ export const colors= {
     secondary: '#ffffff',
     black: 'black',
     gray: 'gray',
-    primary_light: 'rgba(227, 240, 252, 1)'
+    primary_light: 'rgba(227, 240, 252, 1)',
+    light_green: 'rgba(181, 235, 205, 1)'
 }

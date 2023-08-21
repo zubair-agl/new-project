@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RootNav from "./src/navigation/root";
 import PushController from "./pushController";
+import { useDispatch, useSelector } from "react-redux";
+import { retrieveToken } from "./src/redux/actions";
+import { ActivityIndicator, View } from "react-native"
 
 function App() {
 
+    const dispatch = useDispatch()
+    const state = useSelector((state) => state.authReducer)
+
+    useEffect(() => {
+        console.log('state app', state.initialLoading)
+        dispatch(retrieveToken())
+    }, [])
+
+
     return (
         <>
-            <RootNav />
-            <PushController />
+            {
+                state.initialLoading ?
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <ActivityIndicator size={'large'} />
+                    </View>
+                    :
+                    <>
+                        <RootNav />
+                        <PushController />
+                    </>
+            }
+
         </>
     )
 }

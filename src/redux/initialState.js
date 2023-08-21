@@ -1,10 +1,12 @@
 export const initialState = {
     isLoggedIn: false,
     userId: '',
-    token: '',
+    token: null,
     refreshToken: '',
     expiresOn: '',
     data: '',
     notifList: [],
-    isLoading: false
+    isLoading: false,
+    message: '',
+    initialLoading: false
   };

@@ -16,10 +16,8 @@ function NotificationsTab({ navigation }) {
       <Tab.Navigator screenOptions={{
         tabBarLabelStyle: styles.labelStyle,
         tabBarStyle: { backgroundColor: colors.secondary, },
-        tabBarItemStyle: { width: 'auto', flexDirection: 'row' },
+        tabBarItemStyle: { width: 'auto', flexDirection: 'row-reverse' },
         tabBarIconStyle: { width: 'auto', height: 'auto', alignSelf: 'right' }
-
-
       }}
       >
         <Tab.Screen name="AllNotif" component={AllNotifications} options={{ tabBarIcon: () => <Counter />, title: 'All', }} />

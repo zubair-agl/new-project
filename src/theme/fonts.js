@@ -1,6 +1,7 @@
 const { getFontSize } = require("../util/fontScale");
 
 export const size= {
+    font10: getFontSize(10),
     font14: getFontSize(14),
     font15: getFontSize(15),
     font16: getFontSize(16),

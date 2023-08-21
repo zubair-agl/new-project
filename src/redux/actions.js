@@ -4,11 +4,20 @@ import { login, qrLogin } from '../api/authService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendDeviceInfo } from '../api/nativeServices';
 import { getPushNotifications } from '../api/pushNotifications';
+import Toast from 'react-native-simple-toast';
+
 
 
 const setLoading = (loading) => {
   return {
     type: t.SET_LOADING,
+    payload: loading
+  }
+}
+
+const setInitialLoading = (loading) => {
+  return {
+    type: t.SET_INITIAL_LOADING,
     payload: loading
   }
 }
@@ -22,11 +31,12 @@ const setLoginState = (loginData) => {
 };
 
 // dispatches logout action to reducer
-const setLogoutState = () => {
+const setLogoutState = (data) => {
   return {
     type: t.SET_LOGOUT_STATE,
-  };
-};
+    payload: data
+  }
+}
 
 // dispatches getPushNotif to reducer
 const setPushNotifState = (notifData) => {
@@ -35,6 +45,7 @@ const setPushNotifState = (notifData) => {
     payload: notifData
   }
 }
+
 
 // function to store token in local storage
 const setLoginLocal = async (loginToken) => {
@@ -45,6 +56,26 @@ const setLoginLocal = async (loginToken) => {
   }
 };
 
+const setRetrievedToken = (userToken)=> {
+  return{
+    type: t.RETRIEVE_TOKEN,
+    payload: userToken
+  }
+}
+
+export const retrieveToken = ()=> {
+  return async (dispatch) => {
+    try{
+      dispatch(setInitialLoading(true))
+      const userToken =  JSON.parse(await AsyncStorage.getItem('loginToken'))
+      dispatch(setRetrievedToken(userToken))
+    }
+    catch(err) {
+      console.log(err)
+    }
+  }
+}
+
 
 export const userLogin = (input, deviceInfo) => {
   return async (dispatch) => {
@@ -52,6 +83,7 @@ export const userLogin = (input, deviceInfo) => {
       dispatch(setLoading(true))
       const response = await login(input)
       if (response.status.message === 'Login success') {
+        Toast.show('Login Successfull!');
         dispatch(setLoginState({ ...response, userId: response.data.userName }))
         setLoginLocal(response.data.data) // calling function to save user token locally
         const headers = { 'Authorization': response.data.data }
@@ -71,15 +103,12 @@ export const userLogin = (input, deviceInfo) => {
 };
 
 export const userLogout = () => {
+  console.log('insode userlogout')
   return async (dispatch) => {
-    try {
-      await AsyncStorage.clear()
-      dispatch(setLogoutState())
-    }
-    catch (error) {
-      Alert.alert('Login Failed', 'Some error occured, please retry')
-      console.log(error)
-    }
+    await AsyncStorage.removeItem('loginToken')
+    console.log('insosdne userlogout')
+    dispatch(setLoading(true))
+    dispatch(setLogoutState())
   };
 };
 
@@ -94,13 +123,5 @@ export const getPushNotifList = (userToken) => {
       Alert.alert('Notifications Error', 'Some error occured, please retry')
       console.log(error)
     }
-  }
-}
-
-export const qrScanLogin = (userToken, body) => {
-  return async (dispatch) => {
-      dispatch(setLoading(true))
-      console.log('scan qr payload', userToken, body)
-      const response = await qrLogin(userToken, body)
   }
 }

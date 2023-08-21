@@ -14,19 +14,31 @@ import Scan from '../../../assets/images/scan.svg'
 import More from '../../../assets/images/more-vertical.svg'
 import ZapOff from '../../../assets/images/zap-off.svg'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPushNotifList, qrScanLogin } from '../../redux/actions'
+import Toast from 'react-native-simple-toast';
+import { qrLogin } from '../../api/authService';
 
 
 function ScanQRScreen(props) {
-    const onSuccess = e => {
+    const onSuccess = async e => {
         // Linking.openURL(e.data).catch(err =>
         //     console.error('An error occured', err)
         // );
-        console.log('scan info',e, val.token)
+        //console.log('scan info',e, val.token)
         const payload = {
             'screencode' : e.data
         }
-        dispatch(qrScanLogin(val.token, payload))
+        // dispatch(qrScanLogin(val.token, payload).then(res=> {
+        //     if (val.message === "success") {
+        //         props.navigation.goBack()
+        //     }
+        // }))
+        const res= await qrLogin(val.token, payload)
+        console.log('dekh idhar',res.data)
+        if(res.status.message== 'success') {
+            Toast.show('Login Successfull!');
+            props.navigation.goBack()
+        }
+        //console.log('state in scan screen', val)
     };
 
     const dispatch = useDispatch() // dispatching login action through this hook

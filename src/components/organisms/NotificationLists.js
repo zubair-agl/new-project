@@ -15,7 +15,7 @@ const NotificationsList = (props) => {
     return (
         <View>
             {
-                val.isLoading ? <ActivityIndicator />
+                val.isLoading ? <ActivityIndicator size={'large'}/>
                 :
                 <FlatList
                 data={props.data ? props.data : []}
