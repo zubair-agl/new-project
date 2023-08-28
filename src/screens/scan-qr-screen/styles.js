@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { metrics } from '../../theme/metrics';
+import { colors } from '../../theme/colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -29,6 +30,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         alignSelf: 'center',
         bottom: metrics.screenHeight * 0.05
+    },
+    flashIcon: {
+        height: 24,
+        width: 24,
+        tintColor: colors.secondary
     }
 });
 

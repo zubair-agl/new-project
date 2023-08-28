@@ -3,9 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../../screens/login-screen';
 import ScanQRScreen from '../../screens/scan-qr-screen';
 import { useSelector } from 'react-redux';
-import NotificationsTab from '../top/NotifTabs';
-import styles from './styles';
-import Bar from '../../../assets/images/bar.svg'
 import DrawerTab from '../drawer/DrawerTab';
 
 const Stack = createStackNavigator();

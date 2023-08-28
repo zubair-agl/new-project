@@ -2,7 +2,7 @@ import { initialState } from './initialState';
 import * as t from './contants';
 
 export const authReducer = (state = initialState, action) => {
-  console.log('action payload', action.payload)
+  console.log('action payload', action.type, action.payload)
   switch (action.type) {
     case t.SET_LOADING:
       return {
@@ -13,6 +13,11 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         initialLoading: action.payload
+      }
+    case t.FCM_TOKEN:
+      return {
+        ...state,
+        fcmToken: action.payload
       }
     case t.SET_LOGIN_STATE:
       return {

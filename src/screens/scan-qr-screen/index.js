@@ -3,7 +3,8 @@ import {
     Text,
     TouchableOpacity,
     Linking,
-    SafeAreaView
+    SafeAreaView,
+    Image
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
@@ -16,41 +17,41 @@ import ZapOff from '../../../assets/images/zap-off.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import Toast from 'react-native-simple-toast';
 import { qrLogin } from '../../api/authService';
-
+import { useState } from 'react';
 
 function ScanQRScreen(props) {
+
+    const [flashMode, setFlashMode] = useState(false)
+
     const onSuccess = async e => {
         // Linking.openURL(e.data).catch(err =>
         //     console.error('An error occured', err)
         // );
         //console.log('scan info',e, val.token)
         const payload = {
-            'screencode' : e.data
+            'screencode': e.data
         }
-        // dispatch(qrScanLogin(val.token, payload).then(res=> {
-        //     if (val.message === "success") {
-        //         props.navigation.goBack()
-        //     }
-        // }))
-        const res= await qrLogin(val.token, payload)
-        console.log('dekh idhar',res.data)
-        if(res.status.message== 'success') {
+        const res = await qrLogin(val.token, payload)
+        console.log('dekh idhar', res.data)
+        if (res.status.message == 'success') {
             Toast.show('Login Successfull!');
             props.navigation.goBack()
         }
-        //console.log('state in scan screen', val)
     };
 
     const dispatch = useDispatch() // dispatching login action through this hook
     const val = useSelector((state) => state.authReducer)
-    
+
 
     return (
         <SafeAreaView style={styles.container}>
             <QRCodeScanner
                 showMarker
                 onRead={onSuccess}
-                flashMode={RNCamera.Constants.FlashMode.auto}
+                flashMode={
+                    flashMode ? RNCamera.Constants.FlashMode.torch :
+                        RNCamera.Constants.FlashMode.off
+                }
                 cameraStyle={{
                     height: metrics.screenHeight
                 }}
@@ -69,8 +70,11 @@ function ScanQRScreen(props) {
 
             <TouchableOpacity
                 style={styles.flashContainer}
+                onPress={() => setFlashMode(!flashMode)}
             >
-                <ZapOff />
+                <Image source={flashMode ? require('../../../assets/images/png/flash-off.png') : require('../../../assets/images/png/flash-on.png')}
+                    style={{ height: 24, width: 24, tintColor: 'white' }}
+                />
             </TouchableOpacity>
 
             <TouchableOpacity

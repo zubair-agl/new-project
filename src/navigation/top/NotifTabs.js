@@ -23,10 +23,10 @@ function NotificationsTab({ navigation }) {
         <Tab.Screen name="AllNotif" component={AllNotifications} options={{ tabBarIcon: () => <Counter />, title: 'All', }} />
         <Tab.Screen name="StarredNotif" component={StarredNotifications} options={{ title: 'Starred' }} />
       </Tab.Navigator>
-      <QrButton
+      {/* <QrButton
         onPress={() => navigation.navigate('ScanQRScreen')}
         style={styles.scanButton}
-      />
+      /> */}
     </>
   );
 }

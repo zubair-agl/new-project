@@ -1,11 +1,46 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
+import { request, check, PERMISSIONS, RESULTS } from "react-native-permissions";
 import PushNotification from "react-native-push-notification";
-import { Platform } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from "react-redux";
+import { setFcm } from "./src/redux/actions";
 
 // var PushNotification = require("react-native-push-notification");
 
 function PushController() {
+
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+
+  const requestNotificationPermission = async () => {
+    const result = await request(PERMISSIONS.ANDROID.POST_NOTIFICATIONS);
+    return result;
+  };
+  
+  const checkNotificationPermission = async () => {
+    const result = await check(PERMISSIONS.ANDROID.POST_NOTIFICATIONS);
+  
+    return result;
+  };
+
+  const requestPermission = async () => {
+    const checkPermission = await checkNotificationPermission();
+    if (checkPermission !== RESULTS.GRANTED) {
+     const request = await requestNotificationPermission();
+       if(request !== RESULTS.GRANTED){
+            dispatch(setFcm(null))
+        }
+        else {
+          setLoading(false)
+        }
+    }
+  };
+
+  const getToken = async(token) => {
+    console.log("TOKEN:", token.token);
+    dispatch(setFcm(token.token))
+    await AsyncStorage.setItem('fcmToken', JSON.stringify(token.token))
+  }
 
   useEffect(() => {
     PushNotification.createChannel(
@@ -25,10 +60,7 @@ function PushController() {
     // })
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
-      onRegister: async function (token) {
-        console.log("TOKEN:", token.token);
-        await AsyncStorage.setItem('fcmToken', JSON.stringify(token.token))
-      },
+      onRegister: (token) => {getToken(token)},
 
       // (required) Called when a remote or local notification is opened or received
       onNotification: function (notification) {
@@ -50,7 +82,8 @@ function PushController() {
       popInitialNotification: true,
       requestPermissions: true
     });
-  })
+    requestPermission()
+  }, [loading])
 
   return null
 }

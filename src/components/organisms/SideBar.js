@@ -7,6 +7,7 @@ import { metrics } from '../../theme/metrics';
 import { size, type, weight } from '../../theme/fonts';
 import { colors } from '../../theme/colors';
 import SideBarItem from '../molecules/SideBarItem';
+import AlertDialog from '../molecules/AlertDialog';
 
 const SideBar = () => {
 
@@ -26,26 +27,29 @@ const SideBar = () => {
                     src={require('../../../assets/images/png/profile.png')}
                     color={colors.primary_light}
                     count={2}
+                    title={'Profile'}
                 />
                 <SideBarItem
                     src={require('../../../assets/images/png/location-marker.png')}
+                    title={'Location'}
                 />
                 <SideBarItem
                     src={require('../../../assets/images/png/phone.png')}
+                    title={'Phone'}
                 />
                 <SideBarItem
                     src={require('../../../assets/images/png/badge.png')}
                     color={colors.light_green}
                     count={7}
+                    title={'Badge'}
                 />
                 <SideBarItem
                     src={require('../../../assets/images/png/wallet.png')}
+                    title={'Wallet'}
                 />
                 <SideBarItem
                     src={require('../../../assets/images/png/menu.png')}
-                />
-                <SideBarItem
-                    src={require('../../../assets/images/png/badge.png')}
+                    title={'Careers'}
                 />
 
 
@@ -57,7 +61,11 @@ const SideBar = () => {
                         <ActivityIndicator size={'small'} />
                         :
                         <LogoutButton
-                            onPress={() => dispatch(userLogout())}
+                            onPress={() => {
+                                AlertDialog(
+                                    'Logout', 'Are you sure to logout?',
+                                    () => dispatch(userLogout()))
+                            }}
                         />
                 }
             </View>

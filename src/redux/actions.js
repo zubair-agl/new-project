@@ -46,6 +46,15 @@ const setPushNotifState = (notifData) => {
   }
 }
 
+export const setFcm = (fcmToken) => {
+  return {
+    type: t.FCM_TOKEN,
+    payload: fcmToken
+  }
+}
+
+
+
 
 // function to store token in local storage
 const setLoginLocal = async (loginToken) => {
@@ -78,6 +87,8 @@ export const retrieveToken = ()=> {
 
 
 export const userLogin = (input, deviceInfo) => {
+  console.log('device info', deviceInfo)
+
   return async (dispatch) => {
     try {
       dispatch(setLoading(true))

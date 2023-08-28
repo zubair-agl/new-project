@@ -6,7 +6,7 @@ const SideBarItem = (props)=> {
     return(
         <View style= {[styles.conatiner, {backgroundColor: props.backgroundColor}]}>
             <Image source={props.src} style= {styles.icons}/>
-            <Text style= {styles.itemText}>Lorem Ipsum</Text>
+            <Text style= {styles.itemText}>{props.title}</Text>
             <Text style= {[styles.itemCountText, {backgroundColor: props.color}]}>{props.count}</Text>
         </View>
     )

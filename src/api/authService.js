@@ -3,7 +3,7 @@ import { LOGIN_URL, QR_LOGIN_URL } from "./constants";
 import { Alert } from 'react-native'
 import Toast from 'react-native-simple-toast';
 
-export async function login(body, deviceInfo) {
+export async function login(body) {
   try {
     const res = await axios.post(`${LOGIN_URL}`, body)
     console.log('response in services', res.data)

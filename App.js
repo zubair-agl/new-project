@@ -4,16 +4,24 @@ import PushController from "./pushController";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveToken } from "./src/redux/actions";
 import { ActivityIndicator, View } from "react-native"
+import messaging from '@react-native-firebase/messaging';
 
 function App() {
 
     const dispatch = useDispatch()
     const state = useSelector((state) => state.authReducer)
+    
+       
 
     useEffect(() => {
+        
         console.log('state app', state.initialLoading)
         dispatch(retrieveToken())
     }, [])
+
+    
+
+    
 
 
     return (
@@ -26,9 +34,9 @@ function App() {
                     :
                     <>
                         <RootNav />
-                        <PushController />
                     </>
             }
+            <PushController />
 
         </>
     )
