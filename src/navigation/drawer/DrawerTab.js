@@ -5,6 +5,7 @@ import Bar from '../../../assets/images/bar.svg'
 import { TouchableOpacity } from 'react-native';
 import SideBar from '../../components/organisms/SideBar';
 import Scan from '../../../assets/images/qr.svg'
+import ScanQRScreen from '../../screens/scan-qr-screen';
 
 const Drawer = createDrawerNavigator();
 
@@ -28,6 +29,9 @@ function DrawerTab() {
         <Drawer.Navigator drawerContent={(props) => <SideBar {...props} />}>
             <Drawer.Screen name="Feed" component={NotificationsTab}
                 options={defaultOptions}
+            />
+            <Drawer.Screen name="ScanQRScreen" component={ScanQRScreen}
+                options={{ headerShown: false }}
             />
         </Drawer.Navigator>
     );

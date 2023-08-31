@@ -6,11 +6,11 @@ import { size } from '../../theme/fonts'
 
 
 const Counter = (props)=> {
-    const val = useSelector((state) => state.authReducer)
+    const notifState = useSelector((state) => state.notifReducer)
 
     return(
         <View style= {styles.conatiner}>
-        <Text style= {styles.count}>{val.notifList.length}</Text>
+        <Text style= {styles.count}>{notifState.notifList.length}</Text>
         </View>
     )
 }

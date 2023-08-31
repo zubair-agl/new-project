@@ -6,7 +6,7 @@ import QrButton from '../../components/atoms/QrButton'
 import { colors } from '../../theme/colors'
 import ScanDialogue from '../../components/organisms/ScanDialogue'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPushNotifList } from '../../redux/actions'
+import { getPushNotifList } from '../../redux/actions/notifActions'
 
 
 
@@ -15,10 +15,11 @@ function AllNotifications(props) {
     const [modalVisible, setModalVisible] = useState(false); // pop-up state
 
     const dispatch = useDispatch() // dispatching login action through this hook
-    const val = useSelector((state) => state.authReducer)
+    const authState = useSelector((state) => state.authReducer)
+    const notifState = useSelector((state) => state.notifReducer)
 
     useEffect(()=> {
-        const unsubscribe= dispatch(getPushNotifList(val.token))
+        const unsubscribe= dispatch(getPushNotifList(authState.token))
         return () => unsubscribe
     }, [])
 
@@ -32,7 +33,7 @@ function AllNotifications(props) {
                 />
             </>
 
-            <NotificationsList data={val.notifList} />
+            <NotificationsList data={notifState.notifList} />
 
 
 

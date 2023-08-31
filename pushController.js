@@ -3,7 +3,7 @@ import { request, check, PERMISSIONS, RESULTS } from "react-native-permissions";
 import PushNotification from "react-native-push-notification";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from "react-redux";
-import { setFcm } from "./src/redux/actions";
+import { setFcm } from "./src/redux/actions/fcmActions";
 
 // var PushNotification = require("react-native-push-notification");
 

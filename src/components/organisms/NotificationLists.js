@@ -10,12 +10,12 @@ import moment from 'moment';
 const NotificationsList = (props) => {
     const date = new Date();
     console.log(date.toLocaleString())
-    const val = useSelector((state) => state.authReducer)
+    const notifState = useSelector((state) => state.notifReducer)
 
     return (
         <View>
             {
-                val.isLoading ? <ActivityIndicator size={'large'}/>
+                notifState.isLoading ? <ActivityIndicator size={'large'}/>
                 :
                 <FlatList
                 data={props.data ? props.data : []}

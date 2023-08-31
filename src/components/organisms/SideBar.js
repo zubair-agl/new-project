@@ -1,26 +1,35 @@
 import { View, StyleSheet, Text, ActivityIndicator } from 'react-native'
 import Avatar from '../../../assets/images/avatar.svg'
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogout } from '../../redux/actions';
 import LogoutButton from '../atoms/LogoutButton';
 import { metrics } from '../../theme/metrics';
 import { size, type, weight } from '../../theme/fonts';
 import { colors } from '../../theme/colors';
 import SideBarItem from '../molecules/SideBarItem';
 import AlertDialog from '../molecules/AlertDialog';
+import { userLogout } from '../../redux/actions/authActions';
+import { useNavigation } from '@react-navigation/native';
 
 const SideBar = () => {
 
     const dispatch = useDispatch() // dispatching login action through this hook
-    const val = useSelector((state) => state.authReducer)
-    console.log(val.isLoggedIn)
+    const state = useSelector((state) => state.authReducer)
+    const nav = useNavigation()
+
+    console.log(state)
+
+    const logout = ()=> {
+        nav.navigate('InitLoading')
+        dispatch(userLogout())
+    }
+    
 
     return (
         <View style={styles.container}>
             <View style={styles.itemsView} >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Avatar />
-                    <Text style={styles.headerText}>{val.userId}</Text>
+                    <Text style={styles.headerText}>{state.userId}</Text>
                 </View>
                 <View style={{ marginTop: metrics.screenHeight * 0.05 }} />
                 <SideBarItem
@@ -56,18 +65,15 @@ const SideBar = () => {
             </View>
 
             <View style={styles.buttonView}>
-                {
-                    val.isLoading ?
-                        <ActivityIndicator size={'small'} />
-                        :
+               
                         <LogoutButton
                             onPress={() => {
                                 AlertDialog(
                                     'Logout', 'Are you sure to logout?',
-                                    () => dispatch(userLogout()))
+                                    () => logout())
                             }}
                         />
-                }
+                
             </View>
         </View>
     )

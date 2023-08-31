@@ -11,7 +11,7 @@ export async function getPushNotifications(userToken) {
     }
     console.log('headers in get Notif', headers)
     const res = await axios.post(`${PUSH_NOTIF_URL}`, {}, {headers}) 
-    console.log('pushresponse', res.data)
+    // console.log('pushresponse', res.data)
     return res.data
   }
   catch(err) {

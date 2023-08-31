@@ -13,7 +13,7 @@ const LoginForm = (props) => {
 
     const [secureTextEntry, setSecureTextEntry] = useState(true); // password visibility state
     const [toggleCheckBox, setToggleCheckBox] = useState(false) // checkbox state
-    const val = useSelector((state) => state.authReducer)
+    const state = useSelector((state) => state.authReducer)
 
 
     return (
@@ -70,7 +70,7 @@ const LoginForm = (props) => {
                     </View>
 
                     {
-                        val.isLoading ? <ActivityIndicator size={'small'} />
+                        state.isLoading ? <ActivityIndicator size={'small'} />
                             :
                             <ThemeButton
                                 title={'Login'}
