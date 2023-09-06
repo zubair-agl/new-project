@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StatusBar, View, } from 'react-native'
+import { SafeAreaView, StatusBar} from 'react-native'
 import styles from './styles'
 import NotificationsList from '../../components/organisms/NotificationLists'
-import QrButton from '../../components/atoms/QrButton'
 import { colors } from '../../theme/colors'
-import ScanDialogue from '../../components/organisms/ScanDialogue'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPushNotifList } from '../../redux/actions/notifActions'
 

@@ -35,6 +35,14 @@ const styles = StyleSheet.create({
         height: 24,
         width: 24,
         tintColor: colors.secondary
+    },
+    cameraStyle: {
+        height: metrics.screenHeight,
+        width: metrics.screenWidth
+    },
+    cameraContainerStyle: {
+        height: metrics.screenHeight,
+        width: metrics.screenWidth
     }
 });
 

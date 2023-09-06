@@ -69,7 +69,7 @@ const SideBar = () => {
                         <LogoutButton
                             onPress={() => {
                                 AlertDialog(
-                                    'Logout', 'Are you sure to logout?',
+                                    'Logout', 'Are you sure you want to logout?',
                                     () => logout())
                             }}
                         />

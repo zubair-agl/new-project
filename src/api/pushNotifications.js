@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DEVICE_DETAIL_URL, LOGIN_URL, PUSH_NOTIF_URL } from "./constants";
+import { PUSH_NOTIF_URL } from "./constants";
 import { Alert } from 'react-native'; 
 
 export async function getPushNotifications(userToken) {

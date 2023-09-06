@@ -11,7 +11,6 @@ export async function sendDeviceInfo(deviceInfo, headers) {
   }
   catch(err) {
     console.log(err)
-    Alert.alert('Error', 'Something went wrong!');
   }
 
 }
